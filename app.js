@@ -7,7 +7,6 @@ var path = __dirname + '/views/';
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var hbs = require('hbs');
-//var bodyParser = require('body-parser');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -20,7 +19,6 @@ router.use(function (req,res,next) {
 });
 
 router.get('/', function(req, res) {
-  //res.sendFile(path + 'index.html');
   res.render('index');
 });
 
