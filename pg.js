@@ -24,7 +24,7 @@ module.exports = {
  getMessages: function(callback) {
         // No need for time zone conversion!
 
-        var getMessagesQueryString = 'SELECT sent_by, msg, to_char(time, \'HH24:MI\') as time FROM messages';
+        var getMessagesQueryString = 'SELECT TRIM(sent_by) AS sent_by, msg, to_char(time, \'HH24:MI\') as time FROM messages';
 
         pgQuery(getMessagesQueryString, function(err, result) {
             if (err) {

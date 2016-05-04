@@ -3,7 +3,7 @@ var app = express();
 var router = express.Router();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var path = __dirname + '/views/';
+var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var hbs = require('hbs');
@@ -12,6 +12,7 @@ var db = require('./pg.js');
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html');
+app.use(express.static(__dirname + '/public'));
 app.engine('html', hbs.__express);
 
 router.use(function (req,res,next) {
