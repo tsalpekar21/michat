@@ -7,6 +7,7 @@ var path = __dirname + '/views/';
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var hbs = require('hbs');
+var db = require('./pg.js');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -19,13 +20,19 @@ router.use(function (req,res,next) {
 });
 
 router.get('/', function(req, res) {
-  res.render('index');
+  db.getMessages(function(err, result) {
+    console.log(result);
+    res.render('index', { messages: result });
+  });
 });
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
     io.emit('chat message', msg);
+    var sent_by = msg.substr(0,msg.indexOf(":"));
+    var chat_message = msg.substr(msg.indexOf(":")+1);
+    db.insertMessage(sent_by, chat_message, function(err, result) { if (err) console.log(err) });
   });
 });
 

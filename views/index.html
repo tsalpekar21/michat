@@ -27,13 +27,15 @@
           <a class="navbar-brand" href="/">Chat Room</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          </ul>
         </div>
       </div>
     </nav>
 
-    <ul id="messages"></ul>
+    <ul id="messages">
+      {{#each messages}}
+        <li>{{sent_by}}: {{msg}}</li>
+      {{/each}}
+    </ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
